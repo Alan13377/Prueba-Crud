@@ -233,22 +233,21 @@
 		max-width: 1200px;
 		margin: 0 auto;
 	}
-	@media (min-width: 768px) {
-		.contenedor-productos {
-			display: flex;
-			justify-content: space-around;
-		}
-	}
 
+	.contenedor-productos {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 20px;
+	}
 	.tabla {
 		margin-top: 20px;
 		display: flex;
 		justify-content: center;
 	}
 	.contenido-tabla {
-		width: 100%;
 		border-collapse: collapse;
 	}
+
 	@media (max-width: 768px) {
 		table {
 			width: 100%;
