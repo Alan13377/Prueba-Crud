@@ -1,7 +1,7 @@
 <div class="header">
 	<h1>Svelte JS CRUD</h1>
 	<nav>
-		<a href="/">Inicio</a>
+		<a href="productos">Inicio</a>
 	</nav>
 </div>
 

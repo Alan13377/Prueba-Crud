@@ -245,10 +245,12 @@
 		margin: 0 auto;
 	}
 
-	.contenedor-productos {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		grid-gap: 20px;
+	@media (min-width: 768px) {
+		.contenedor-productos {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			grid-gap: 20px;
+		}
 	}
 	.tabla {
 		margin-top: 20px;
@@ -280,6 +282,7 @@
 	}
 	.contenido-tabla tr,
 	.contenido-tabla th {
+		text-align: center;
 		padding: 15px 10px;
 	}
 
@@ -301,6 +304,12 @@
 	}
 	.formulario {
 		width: 100%;
+	}
+	label {
+		font-size: 15px;
+		display: block;
+
+		font-weight: bold;
 	}
 
 	.select select {
