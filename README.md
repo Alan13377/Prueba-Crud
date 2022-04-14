@@ -51,6 +51,11 @@ Una vez ejecutado el comando npm run dev
 acceder a la direccion http://localhost:3000
 para poder ver el proyecto.
 
+## Link del Proyecto
+
+Puede ver el proyecto en funcionamiento en el siguiente enlace.
+https://crud-productos.netlify.app/
+
 # create-svelte
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
