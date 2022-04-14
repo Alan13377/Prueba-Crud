@@ -10,6 +10,10 @@
 	getData();
 </script>
 
+<svelte:head>
+	<title>Productos</title>
+</svelte:head>
+
 <h2>Productos</h2>
 
 <div class="contenedor-frutas">

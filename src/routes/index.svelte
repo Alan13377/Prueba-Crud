@@ -147,6 +147,10 @@
 	getData();
 </script>
 
+<svelte:head>
+	<title>Crud</title>
+</svelte:head>
+
 <div class="contenedor-productos">
 	<form class="formulario" enctype="multipart/form-data">
 		<fieldset>
@@ -238,11 +242,6 @@
 <style>
 	img {
 		width: 100px;
-	}
-
-	.container {
-		max-width: 1200px;
-		margin: 0 auto;
 	}
 
 	@media (min-width: 768px) {
