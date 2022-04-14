@@ -1,3 +1,5 @@
+### Crud Svelte
+
 Crud realizado con el Framework Front-end SvelteKit para mostrar las vistas e interactuar con la aplicacion.
 El backend fue realizado con el servicio Supabase que permite crear un backend con una base de datos Postgres.
 
@@ -6,9 +8,10 @@ El backend fue realizado con el servicio Supabase que permite crear un backend c
 ## Paso 1
 
 **Opcion 1 - Descargar Zip:** Dar click en el boton code, luego en Download ZIP y una vez descargado descomprimir el archivo.
+
 **Opcion 2 - Clonar repositorio:** Dar click en el boton code y el su terminal escribir el siguiente comando.
 
-    git-clone https://github.com/Alan13377/Prueba-Crud.git
+    git clone https://github.com/Alan13377/Prueba-Crud.git
 
 Para acceder a la carpeta en la terminal y abrir el proyecto, ejecutar los siguientes comandos. (Es necesario tener visual studio code instalado)
 
