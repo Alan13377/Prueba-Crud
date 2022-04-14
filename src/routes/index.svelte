@@ -3,7 +3,6 @@
 	import Swal from 'sweetalert2';
 	import 'sweetalert2/dist/sweetalert2.css';
 
-	let bandera = true;
 	let productos = [];
 	let id = '';
 	let nombre;
@@ -20,10 +19,6 @@
 		productos = data;
 	};
 
-	if (nombre == '') {
-	} else {
-	}
-
 	async function SaveProduct(e) {
 		e.preventDefault();
 		const filename = 'imagen' + '/' + Date.now();
@@ -32,7 +27,7 @@
 			upsert: false
 		});
 		const { publicURL } = await supabase.storage.from('imagenes').getPublicUrl(filename);
-		const { data, error, status } = await supabase.from('Productos').insert([
+		const newProduct = await supabase.from('Productos').insert([
 			{
 				nombre: nombre,
 				precio: precio,
@@ -45,6 +40,24 @@
 			}
 		]);
 
+		if (newProduct.status === 201) {
+			nombre = '';
+			precio = '';
+			sku = '';
+			temporada = '';
+			cantidad = '';
+			categoria = '';
+			Swal.fire({
+				position: 'top-end',
+				icon: 'success',
+				title: 'Producto Guardado exitosamente',
+				showConfirmButton: false,
+				timer: 1500
+			});
+		} else {
+			Swal.fire('No se guardo Correctamente', 'Asegurate de llenar todos los campos', 'error');
+		}
+
 		getData();
 	}
 
@@ -56,7 +69,6 @@
 		temporada = producto.temporada;
 		cantidad = producto.cantidad;
 		categoria = producto.categoria;
-		bandera = false;
 	}
 	async function updateProduct(e) {
 		e.preventDefault();
@@ -80,7 +92,7 @@
 				upsert: false
 			});
 			const { publicURL } = await supabase.storage.from('imagenes').getPublicUrl(filename);
-			const { data, error } = await supabase
+			const update = await supabase
 				.from('Productos')
 				.update({
 					nombre: nombre,
@@ -93,9 +105,8 @@
 					filename: filename
 				})
 				.match({ id: id });
-			console.log(error);
-			console.log(data);
 		}
+
 		getData();
 	}
 
@@ -138,53 +149,53 @@
 
 <div class="contenedor-productos">
 	<form class="formulario" enctype="multipart/form-data">
-		<div>
-			<label for="nombre">Nombre</label>
-			<input bind:value={nombre} type="text" name="nombre" placeholder="Nombre del Producto" />
-		</div>
-		<div>
-			<label for="precio">Precio</label>
-			<input bind:value={precio} type="text" name="precio" placeholder="Precio" />
-		</div>
-		<div>
-			<label for="sku">SKU</label>
-			<input bind:value={sku} type="number" name="sku" />
-		</div>
-		<div class="select select-categoria">
-			<label for="temporada">En temporada</label>
-			<select name="temporada" bind:value={temporada}>
-				<option value="" disabled>--Seleccione--</option>
-				<option value={true}>Verdadero</option>
-				<option value={false}>Falso</option>
-			</select>
-		</div>
-		<div>
-			<label for="imagen">Imagen</label>
-			<input type="file" on:change={getFile} />
-			<input type="hidden" bind:value={id} />
-		</div>
-		<div>
-			<label for="cantidad">Cantidad</label>
-			<input
-				bind:value={cantidad}
-				type="text"
-				name="cantidad"
-				placeholder="Cantidad del Producto"
-			/>
-		</div>
-		<div class="select select-categoria">
-			<label for="categoria">Categoria</label>
-			<select name="categoria" bind:value={categoria}>
-				<option value="" disabled>--Seleccione--</option>
-				<option value="Verdura">Verdura</option>
-				<option value="Fruta">Fruta</option>
-			</select>
-		</div>
-		<input type="submit" class="btn btn-submit" value="Enviar" on:click={SaveProduct} />
-		<button class="btn btn-update" value="Actualizar" disabled={bandera} on:click={updateProduct}
-			>Actualizar</button
-		>
-		<button class="btn btn-cancelar" on:click|preventDefault={cancelar}> Cancelar </button>
+		<fieldset>
+			<div>
+				<label for="nombre">Nombre</label>
+				<input bind:value={nombre} type="text" name="nombre" placeholder="Nombre del Producto" />
+			</div>
+			<div>
+				<label for="precio">Precio</label>
+				<input bind:value={precio} type="number" name="precio" placeholder="Precio" />
+			</div>
+			<div>
+				<label for="sku">SKU</label>
+				<input bind:value={sku} type="number" name="sku" />
+			</div>
+			<div class="select select-categoria">
+				<label for="temporada">En temporada</label>
+				<select name="temporada" bind:value={temporada}>
+					<option value="" disabled>--Seleccione--</option>
+					<option value={true}>Verdadero</option>
+					<option value={false}>Falso</option>
+				</select>
+			</div>
+			<div>
+				<label for="imagen">Imagen</label>
+				<input type="file" on:change={getFile} />
+				<input type="hidden" bind:value={id} />
+			</div>
+			<div>
+				<label for="cantidad">Cantidad</label>
+				<input
+					bind:value={cantidad}
+					type="text"
+					name="cantidad"
+					placeholder="Cantidad del Producto"
+				/>
+			</div>
+			<div class="select select-categoria">
+				<label for="categoria">Categoria</label>
+				<select name="categoria" bind:value={categoria}>
+					<option value="" disabled>--Seleccione--</option>
+					<option value="Verdura">Verdura</option>
+					<option value="Fruta">Fruta</option>
+				</select>
+			</div>
+			<input type="submit" class="btn btn-submit" value="Enviar" on:click={SaveProduct} />
+			<button class="btn btn-update" value="Actualizar" on:click={updateProduct}>Actualizar</button>
+			<button class="btn btn-cancelar" on:click|preventDefault={cancelar}> Cancelar </button>
+		</fieldset>
 	</form>
 	<div class="tabla">
 		<table id="table" class="contenido-tabla">
